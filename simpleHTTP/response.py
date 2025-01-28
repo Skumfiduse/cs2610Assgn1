@@ -1,0 +1,16 @@
+# Creates a responce to the client.
+# The body part will be what is displayed in the browser.
+class Response:
+    def __init__(
+            self,
+            version, #string
+            code, #number
+            reason, #string
+            headers, #dict, the keys are the header names and values are the header values
+            body, #string
+    ):
+        self.version = version
+        self.code = code
+        self.reason = reason
+        self.headers = headers
+        self.body = body
