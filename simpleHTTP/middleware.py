@@ -1,13 +1,20 @@
 #functions that do things between things
 
+def responceMiddlewareFactory(nextMiddleware):
+    def middleware(req):
+        
+
+
+        return res
+
 def loggingMiddlewareFactory(nextMiddleware):
     def middleware(req):
         # do something request
-        print(f"Request Method: {req.method}, Path: {req.uri}")
+        print(f"Method: {req.method}, URI: {req.uri}")
         # call the nextMiddleware function
         res = nextMiddleware(req)
         # do something with result of nextMiddlware
-        print(f"Response Code: {res.code}, Reason: {res.reason}")
+        print(f"URI: {res.uri} Code: {res.code}, Reason: {res.reason}")
         # return a Response (not optional!)
         return res
 

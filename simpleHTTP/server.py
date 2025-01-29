@@ -52,6 +52,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             # Parse the request
             parsed = decode(data)
             print(f"Method: {parsed.method}\nuri: {parsed.uri}\nversion: {parsed.version}\n body: {parsed.body}")
+            # send it through the middle ware chain reverse order
+            # response, logging, Do later(static files), notFound
+
+            # Return the response
 
             #TODO: parse the request, send through middleware and encode the response
             res = "HTTP/1.1 200 Ok\nConnection: close\n\n<h1>Hello, world!</h1>"
@@ -65,26 +69,16 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 #     print("listening on port 8000")
 
 #     while True:
-#         print("connected: 1")
 #         connection, addr = s.accept()
 #         with connection:
-#             print("connected: 2")
 #             data = connection.recv(8192)
-#             print("connected: 3")
 
 #             if not data:
 #                 continue
-#             print("connected: 4")
 
 #             request = decode(data)
-#             print(request.method)
-#             print(request.uri)
-#             print(request.version)
-#             print(request.body)
-#             print(request.headers)
 #             middlewareChain = notFoundMessageMiddlewareFactory(router)
 #             response = middlewareChain(request)
 #             responseBytes = encode(response)
-#             print("connected: 5")
 
 #             connection.send(responseBytes)
