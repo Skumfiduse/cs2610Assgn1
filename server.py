@@ -53,10 +53,14 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             parsed = decode(data)
             print(f"Method: {parsed.method}\nuri: {parsed.uri}\nversion: {parsed.version}\n body: {parsed.body}")
             # send it through the middle ware chain reverse order
-            # response, logging, Do later(static files), notFound
+            # response, log the info, later(check the type), check if exists.
+            # log request, check if exists, later(check type), log response, knit & return response.
 
-            # Return the response
+            
 
+            response = middlewareChain(data)
+
+            # return the response.
             #TODO: parse the request, send through middleware and encode the response
             res = "HTTP/1.1 200 Ok\nConnection: close\n\n<h1>Hello, world!</h1>"
 

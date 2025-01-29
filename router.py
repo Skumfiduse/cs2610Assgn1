@@ -19,7 +19,7 @@ def router(request):
             reason="Not Found",
             version=request.version,
             headers={},
-            body="<h1>router.py says no.<h1>",
+            body="<h1>router.py says no.<h1>\n<div>please go back to the <a href=\"/\">home</a> page</div>",
         )
 
 
