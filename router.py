@@ -1,25 +1,27 @@
 # Big ol' if statement that only returns endpoints. Pretty easy stuff
 from response import Response
-from endpoints import home, about
+from endpoints import home, about, experience, projects
+from middleware import staticMiddlewareFactory
+
 
 def router(request):
     if request.uri == "/":
         return home(request)
     elif request.uri == "/about":
         return about(request)
-    elif request.uri == "experience":
-        return about(request)
+    elif request.uri == "/experience":
+        return experience(request)
     elif request.uri == "/projects":
-        return about(request)
+        return projects(request)
     elif request.uri == "/info":
-        return about(request)
+        return home(request)
     else:
         return Response(
             code=404,
             reason="Not Found",
             version=request.version,
             headers={},
-            body="<h1>router.py says no.<h1>\n<div>please go back to the <a href=\"/\">home</a> page</div>",
+            body="broke",
         )
 
 

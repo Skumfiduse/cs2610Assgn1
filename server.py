@@ -1,7 +1,7 @@
 import socket
 from decoder import decode, encode
 from router import router
-from middleware import loggingMiddlewareFactory, notFoundMessageMiddlewareFactory
+from middleware import notFoundMessageMiddlewareFactory, responseMiddlewareFactory, staticMiddlewareFactory, compose, loggingMiddlewareFactory
 
 # HTTP Request format:
 # <start line>
@@ -51,20 +51,23 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
             # Parse the request
             parsed = decode(data)
-            print(f"Method: {parsed.method}\nuri: {parsed.uri}\nversion: {parsed.version}\n body: {parsed.body}")
+            # print(f"Method: {parsed.method}\nuri: {parsed.uri}\nversion: {parsed.version}\n body: {parsed.body}")
             # send it through the middle ware chain reverse order
-            # response, log the info, later(check the type), check if exists.
-            # log request, check if exists, later(check type), log response, knit & return response.
+            # log, staic?, exists?, knit, router
 
-            
+            middlewareList = [responseMiddlewareFactory, notFoundMessageMiddlewareFactory, staticMiddlewareFactory, loggingMiddlewareFactory]
+            middlewareChain = compose(router, middlewareList)
+            response = middlewareChain(parsed)
+            res = encode(response)
 
-            response = middlewareChain(data)
+            # response = middlewareChain(data)
 
             # return the response.
             #TODO: parse the request, send through middleware and encode the response
-            res = "HTTP/1.1 200 Ok\nConnection: close\n\n<h1>Hello, world!</h1>"
-
-            connection.send(bytes(res, "UTF-8"))
+            
+            # res = "HTTP/1.1 200 Ok\nConnection: close\n\n<h1>Hello, world!</h1>"
+            connection.send(res)
+            # connection.send(bytes(res, "UTF-8"))
 
 
 # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
