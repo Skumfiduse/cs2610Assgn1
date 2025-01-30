@@ -1,6 +1,6 @@
 # Big ol' if statement that only returns endpoints. Pretty easy stuff
 from response import Response
-from endpoints import home, about, experience, projects
+from endpoints import home, about, experience, projects, info
 from middleware import staticMiddlewareFactory
 
 
@@ -14,7 +14,7 @@ def router(request):
     elif request.uri == "/projects":
         return projects(request)
     elif request.uri == "/info":
-        return home(request)
+        return info(request)
     else:
         return Response(
             code=404,

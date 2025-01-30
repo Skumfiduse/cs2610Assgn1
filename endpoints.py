@@ -41,3 +41,12 @@ def projects(req):
         headers={},
         body="projects",
     )
+
+def info(req):
+    return Response(
+        version=req.version,
+        code=301,
+        reason="Perminantly moved",
+        headers={"location": "/about"},
+        body="",
+    )
