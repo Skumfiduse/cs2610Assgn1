@@ -1,1 +1,1 @@
-alert("My JavaScrip Works. :)")
+alert("My JavaScrip Works. ;)")

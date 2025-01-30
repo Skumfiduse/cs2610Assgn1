@@ -3,3 +3,14 @@
     color: blue;
     text-align:center
 }
+
+.header {
+    list-style-type:none;
+    margin: o;
+    padding: 0;
+    display: flex;
+}
+
+.item {
+    margin-right: 10px;
+}
